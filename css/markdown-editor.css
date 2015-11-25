@@ -3,7 +3,6 @@ html {
 }
 
 body, html {
-  font-family: 'Open Sans', sans-serif;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -28,6 +27,10 @@ body, html {
   height: calc(100% - 6rem);
 }
 
+.markdown-editor textarea {
+  display: none;
+}
+
 #editor, #preview {
   flex: 1;
   max-width: 50%;
@@ -38,7 +41,7 @@ body, html {
 #editor {
   background-color: #2a2928;
   color: white;
-  font-family: 'Inconsolata';
+  font-family: 'Roboto Mono';
   font-weight: 400;
   font-size: 18px;
   outline: 0;
