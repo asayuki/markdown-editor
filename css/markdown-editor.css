@@ -1,0 +1,39 @@
+html {
+  font-size: 62.5%;
+}
+
+body, html {
+  font-family: 'Open Sans', sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.editor-header {
+  background-color: #212432;
+  display: block;
+  height: 6rem;
+  width: 100%;
+}
+
+.editor-wrapper {
+  display: flex;
+  height: calc(100% - 6rem);
+}
+
+#editor, #preview {
+  flex: 1;
+  max-width: 50%;
+  overflow: scroll;
+}
+
+#editor {
+  background-color: #2c3043;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+}
+
+#preview {
+  background-color: #FFFFFF;
+}
