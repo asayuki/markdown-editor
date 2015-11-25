@@ -43,13 +43,12 @@ var extend = function ( defaults, options ) {
 
       if (ev.keyCode === 13) {
         // We need to create a whole new div
-        console.log(currentSel);
-        console.log(currentSelRange);
+        //console.log(currentSel);
+        //console.log(currentSelRange);
       }
     },
 
     keyup: function (ev) {
-
 
       var selection = document.getSelection();
       var text = selection.anchorNode.textContent;
@@ -72,6 +71,14 @@ var extend = function ( defaults, options ) {
             selection.addRange(range);
           }
         }
+      }
+
+      if (ev.keyCode === 13) {
+        console.log(selection);
+        console.log(range);
+
+        selection.anchorNode.outerHTML = '';
+
       }
 
 
