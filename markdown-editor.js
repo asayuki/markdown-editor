@@ -1,3 +1,5 @@
+/*jshint esnext: true */
+/*global require, __dirname, console */
 'use strict';
 
 const Hapi = require('hapi'),
@@ -38,7 +40,7 @@ server.route([
     method: 'POST',
     path: '/markdown',
     handler: function (request, reply) {
-      var input2markdown = Marky(request.payload.markdown).html();
+      var input2markdown = new Marky(request.payload.markdown).html();
       return reply(input2markdown);
     }
   },
