@@ -14,6 +14,9 @@
     that.observer.observe(that.editor, observerSettings);
   };
 
+  /*
+   * The functions for the editor
+   */
   markdowneditor.fn = markdowneditor.prototype = {
     editorObserver: function (mutations) {
       mutations.forEach(function(mutation) {
@@ -32,6 +35,11 @@
       });
     },
 
+    /*
+     * Listen on all keyups that happens inside the editor
+     * Will problably be the key to the heart in this.
+     * And most likely the most blurry code
+     */
     rowListener: function (ev) {
       if ([37, 38, 39, 40].indexOf(ev.keyCode) >= 0) {
         if (ev.shiftKey) {
@@ -58,24 +66,37 @@
       }
     },
 
+    /*
+     * Gets the current row (<p>) we're at right know
+     */
     getSelectedNode: function (cb) {
+      // Seems like we need to wait juuuust a milisecond.. or we might miss the selection
       setTimeout(function () {
         var selection = window.getSelection(),
           ourDroid = null;
+
+        // Check if were inside the editor, which we should be
         if (markdowneditor.fn.findUpId(selection.getRangeAt(0).startContainer, 'editor')) {
+          // Lets see if we're at the row
           if (selection.anchorNode.nodeName.toLowerCase() === 'p') {
             ourDroid = selection.anchorNode;
+          // Or if we're inside the row
           } else {
             ourDroid = markdowneditor.fn.findUpTag(selection.getRangeAt(0).startContainer, 'p');
           }
           listenRow = ourDroid;
         }
+
+        // Just incase we ever need to have a callback when we get the current row
         if (typeof(cb) == 'function') {
           cb();
         }
       }, 1);
     },
 
+    /*
+     * Traverse up in the DOM to find a parent with a certain ID
+     */
     findUpId: function (el, id) {
       while (el.parentNode) {
         el = el.parentNode;
@@ -85,6 +106,9 @@
       return null;
     },
 
+    /*
+     * Traverse up in the DOM to find a prent with a certain Tag
+     */
     findUpTag: function (el, tag) {
       while (el.parentNode) {
         el = el.parentNode;
@@ -95,6 +119,9 @@
     }
   };
 
+  /*
+   * Created the markdowneditor
+   */
   Element.prototype.markdowneditor = function (options) {
     if (this) {
       current = new markdowneditor(this, options);
@@ -102,6 +129,9 @@
     return this;
   }
 
+  /*
+   * Get the editor and fire it up
+   */
   var me = document.querySelector('.markdown-editor');
   if (me !== null) {
     me.markdowneditor();
